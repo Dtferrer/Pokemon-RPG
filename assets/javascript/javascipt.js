@@ -61,16 +61,10 @@ $(".attack").click(function () {
     yourPkmn.hp = yourPkmn.hp - counterdmg;
     enemyPkmn.hp = enemyPkmn.hp - damage;
 
-    console.log(yourPkmn.hp)
-
     damage = damage + yourPkmn.attack;
-    
-    console.log(damage);
 
     $(".herohealth").text("Health: " + yourPkmn.hp);
     $(".defhealth").text("Health: " + enemyPkmn.hp);
-
-    console.log("cluck")
 
     healthCheck();
 }); 
@@ -112,7 +106,6 @@ function defenderCheck() {
 function healthCheck() {
     if (yourPkmn.hp <= 0) {
         alert("You ran out of Pokemon! Game Over!");
-
         reset();
     }
 
@@ -120,13 +113,11 @@ function healthCheck() {
         alert("You defeated your opponent! Dare to continue?");
         $(".urenemyimg").empty();
         $("p").removeClass("defhealth");
-
         knockouts++;
     }
 
     if (knockouts == 3) {
         alert("You beat the Elite Three! Congratulations!")
-
         reset();
     }
 }
@@ -151,11 +142,4 @@ function reset() {
     $(".v").text("Health: " + venusaur.hp);
     $(".c").text("Health: " + charizard.hp);
     $(".b").text("Health: " + blastoise.hp);
-
-    // $(".urcharimg").empty();
-    // $(".enemies").empty();
-    // $(".urenemyimg").empty();
-
-    // $(".list").replaceWith(original_state);
-
 }
