@@ -10,25 +10,25 @@ var counterdmg;
 var pikachu = {
     hp: 100,
     attack: 10,
-    counter: 30
+    counter: 20
 };
 
 var venusaur = {
     hp: 180,
     attack: 5,
-    counter: 15
+    counter: 10
 };
 
 var charizard = {
     hp: 120,
     attack: 8,
-    counter: 24
+    counter: 16
 };
 
 var blastoise = {
     hp: 150,
     attack: 6,
-    counter: 18
+    counter: 12
 };
 
 $(".pokemon").click(function() {
