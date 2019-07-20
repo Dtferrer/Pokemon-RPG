@@ -34,14 +34,57 @@ var blastoise = {
 $(".pokemon").click(function() {
     if (isYourPkmnChose) {
         $(this).appendTo(".urenemyimg").css({"background-color":"black", "color":"white"}).attr("id", "defender")
+        defenderCheck();
+        counterdmg = enemyPkmn.counter;
     }
     else {
         $(pkmn).appendTo(".enemiesimg").css("background-color", "red")
         $(this).appendTo(".urcharimg").css("background-color", "white").attr("id", "hero")
         isYourPkmnChose = true;
+        heroCheck();
+        damage = yourPkmn.attack;
     }
 });
 
+function heroCheck() {
+    if ($("#hero").hasClass("pikachu")) {
+   yourPkmn = pikachu;
+    }
+    else if ($("#hero").hasClass("venusaur")) {
+    yourPkmn = venusaur;
+    }
+    else if ($("#hero").hasClass("charizard")) {
+    yourPkmn = charizard;
+    }
+    else if ($("#hero").hasClass("blastoise")) {
+    yourPkmn = blastoise;
+    }
+
+    console.log(yourPkmn);
+}
+
+function defenderCheck() {
+    if ($("#defender").hasClass("pikachu")) {
+        enemyPkmn = pikachu;
+    }
+    else if ($("#defender").hasClass("venusaur")) {
+        enemyPkmn = venusaur;
+    }
+    else if ($("#defender").hasClass("charizard")) {
+        enemyPkmn = charizard;
+    }
+    else if ($("#defender").hasClass("blastoise")) {
+        enemyPkmn = blastoise;
+    }
+    
+    console.log(enemyPkmn);
+}
+
+// ogherohealth = yourPkmn.hp;
+// ogdefhealth = enemyPkmn.hp;
+
+// damage = yourPkmn.attack;
+// counterdmg = enemyPkmn.counter;
 
 $(".attack").click(function () {
     
@@ -50,38 +93,6 @@ $(".attack").click(function () {
     // console.log("clack")
     // defender();
     // console.log("clock")
-
-        if ($("#hero").hasClass("pikachu")) {
-        var yourPkmn = pikachu;
-        }
-        else if ($("#hero").hasClass("venusaur")) {
-        var yourPkmn = venusaur;
-        }
-        else if ($("#hero").hasClass("charizard")) {
-        var yourPkmn = charizard;
-        }
-        else if ($("#hero").hasClass("blastoise")) {
-        var yourPkmn = blastoise;
-        }
-
-        if ($("#defender").hasClass("pikachu")) {
-            var enemyPkmn = pikachu;
-        }
-        else if ($("#defender").hasClass("venusaur")) {
-            var enemyPkmn = venusaur;
-        }
-        else if ($("#defender").hasClass("charizard")) {
-            var enemyPkmn = charizard;
-        }
-        else if ($("#defender").hasClass("blastoise")) {
-            var enemyPkmn = blastoise;
-        }
-    
-    ogherohealth = yourPkmn.hp;
-    ogdefhealth = enemyPkmn.hp;
-
-    damage = yourPkmn.attack;
-    counterdmg = enemyPkmn.counter;
     
     console.log(yourPkmn.attack);
 
@@ -91,12 +102,14 @@ $(".attack").click(function () {
     yourPkmn.hp = yourPkmn.hp - counterdmg;
     enemyPkmn.hp = enemyPkmn.hp - damage;
 
-    damage = damage + damage;
+    console.log(yourPkmn.hp)
+
+    damage = damage + yourPkmn.attack;
     
     console.log(damage);
 
-    $(".herohealth").text("Health: " + ogherohealth);
-    $(".defhealth").text("Health: " + ogdefhealth);
+    $(".herohealth").text("Health: " + yourPkmn.hp);
+    $(".defhealth").text("Health: " + enemyPkmn.hp);
 
     console.log("cluck")
 
@@ -115,9 +128,13 @@ $(".attack").click(function () {
 
     else if (enemyPkmn.hp <= 0) {
         alert("You defeated your opponent! Dare to continue?");
+        
     }
 }); 
 
+function damage() {
+
+}
 // function hero() {
 //     if ($("#hero").hasClass("pikachu")) {
 //         var yourPkmn = pikachu;
