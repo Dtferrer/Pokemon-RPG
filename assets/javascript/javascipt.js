@@ -1,5 +1,5 @@
 var isYourPkmnChose = false;
-var pkmn = $(".pokemon")
+var pkmn = $(".pokemon");
 
 var yourPkmn;
 var enemyPkmn;
@@ -48,7 +48,7 @@ $(".pokemon").click(function() {
 
 function heroCheck() {
     if ($("#hero").hasClass("pikachu")) {
-   yourPkmn = pikachu;
+    yourPkmn = pikachu;
     }
     else if ($("#hero").hasClass("venusaur")) {
     yourPkmn = venusaur;
@@ -59,8 +59,6 @@ function heroCheck() {
     else if ($("#hero").hasClass("blastoise")) {
     yourPkmn = blastoise;
     }
-
-    console.log(yourPkmn);
 }
 
 function defenderCheck() {
@@ -76,8 +74,6 @@ function defenderCheck() {
     else if ($("#defender").hasClass("blastoise")) {
         enemyPkmn = blastoise;
     }
-    
-    console.log(enemyPkmn);
 }
 
 function healthCheck() {
@@ -89,15 +85,7 @@ function healthCheck() {
 
         isYourPkmnChose = false;
 
-        pikachu.hp = 100;
-        venusaur.hp = 180;
-        charizard.hp = 120;
-        blastoise.hp = 150;
-
-        $(".p").text("Health: " + pikachu.hp);
-        $(".v").text("Health: " + venusaur.hp);
-        $(".c").text("Health: " + charizard.hp);
-        $(".b").text("Health: " + blastoise.hp);
+        reset();
     }
 
     else if (enemyPkmn.hp <= 0) {
@@ -108,7 +96,21 @@ function healthCheck() {
 }
 
 function reset() {
+    isYourPkmnChose = false;
 
+    pikachu.hp = 100;
+    venusaur.hp = 180;
+    charizard.hp = 120;
+    blastoise.hp = 150;
+
+    $(".p").text("Health: " + pikachu.hp);
+    $(".v").text("Health: " + venusaur.hp);
+    $(".c").text("Health: " + charizard.hp);
+    $(".b").text("Health: " + blastoise.hp);
+
+    $("p").removeClass("herohealth defhealth");
+
+    $(pkmn).appendTo(".list").css({"background-color":"white", "color":"black"})
 }
 
 $(".attack").click(function () {
@@ -136,16 +138,5 @@ $(".attack").click(function () {
 }); 
 
 $(".reset").click(function () {
-    isYourPkmnChose = false;
-    pikachu.hp = 100;
-    venusaur.hp = 180;
-    charizard.hp = 120;
-    blastoise.hp = 150;
-    console.log(pikachu.hp)
-    $(".p").text("Health: " + pikachu.hp);
-    $(".v").text("Health: " + venusaur.hp);
-    $(".c").text("Health: " + charizard.hp);
-    $(".b").text("Health: " + blastoise.hp);
-    $("p").removeClass("herohealth defhealth");
-    $(pkmn).appendTo(".list").css({"background-color":"white", "color":"black"})
+    reset();
 });
