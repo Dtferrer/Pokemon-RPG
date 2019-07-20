@@ -80,19 +80,38 @@ function defenderCheck() {
     console.log(enemyPkmn);
 }
 
-// ogherohealth = yourPkmn.hp;
-// ogdefhealth = enemyPkmn.hp;
+function healthCheck() {
+    if (yourPkmn.hp <= 0) {
+        alert("You ran out of Pokemon! Game Over!");
+        $(pkmn).appendTo(".list").css({"background-color":"white", "color":"black"})
 
-// damage = yourPkmn.attack;
-// counterdmg = enemyPkmn.counter;
+        $("p").removeClass("herohealth defhealth");
+
+        isYourPkmnChose = false;
+
+        pikachu.hp = 100;
+        venusaur.hp = 180;
+        charizard.hp = 120;
+        blastoise.hp = 150;
+
+        $(".p").text("Health: " + pikachu.hp);
+        $(".v").text("Health: " + venusaur.hp);
+        $(".c").text("Health: " + charizard.hp);
+        $(".b").text("Health: " + blastoise.hp);
+    }
+
+    else if (enemyPkmn.hp <= 0) {
+        alert("You defeated your opponent! Dare to continue?");
+        $(".urenemyimg").empty();
+        $("p").removeClass("defhealth");
+    }
+}
+
+function reset() {
+
+}
 
 $(".attack").click(function () {
-    
-    // console.log("click")
-    // hero();
-    // console.log("clack")
-    // defender();
-    // console.log("clock")
     
     console.log(yourPkmn.attack);
 
@@ -113,72 +132,20 @@ $(".attack").click(function () {
 
     console.log("cluck")
 
-    if (yourPkmn.hp <= 0) {
-        alert("You ran out of Pokemon! Game Over!");
-        $(pkmn).appendTo(".list").css({"background-color":"white", "color":"black"})
-        isYourPkmnChose = false;
-        pikachu.hp = 100;
-        venusaur.hp = 180;
-        charizard.hp = 120;
-        blastoise.hp = 150;
-        $(".herohealth").text("Health: " + yourPkmn.hp);
-        $(".defhealth").text("Health: " + enemyPkmn.hp);
-        $("p").removeClass("herohealth defhealth");
-    }
-
-    else if (enemyPkmn.hp <= 0) {
-        alert("You defeated your opponent! Dare to continue?");
-        
-    }
+    healthCheck();
 }); 
 
-function damage() {
-
-}
-// function hero() {
-//     if ($("#hero").hasClass("pikachu")) {
-//         var yourPkmn = pikachu;
-//     }
-//     else if ($("#hero").hasClass("venusaur")) {
-//         var yourPkmn = venusaur;
-//     }
-//     else if ($("#hero").hasClass("charizard")) {
-//         var yourPkmn = charizard;
-//     }
-//     else if ($("#hero").hasClass("blastoise")) {
-//         var yourPkmn = blastoise;
-//     }
-//     console.log(yourPkmn)
-
-//     $("#hero > .health").addClass("herohealth");
-
-//     damage = yourPkmn.attack;
-
-//     $("#defender:contains('Health')").text("Health: " + (enemyPkmn.hp));
-
-// }
-
-// function defender() {
-//     if ($("#defender").hasClass("pikachu")) {
-//         var enemyPkmn = pikachu;
-//     }
-//     else if ($("#defender").hasClass("venusaur")) {
-//         var enemyPkmn = venusaur;
-//     }
-//     else if ($("#defender").hasClass("charizard")) {
-//         var enemyPkmn = charizard;
-//     }
-//     else if ($("#defender").hasClass("blastoise")) {
-//         var enemyPkmn = blastoise;
-//     }
-//     console.log(enemyPkmn)
-
-//     $("#defender > .health").addClass("defhealth");
-
-//     var counterdmg = enemyPkmn.counter;
-// }
-
 $(".reset").click(function () {
-    $(pkmn).appendTo(".list").css({"background-color":"white", "color":"black"})
     isYourPkmnChose = false;
+    pikachu.hp = 100;
+    venusaur.hp = 180;
+    charizard.hp = 120;
+    blastoise.hp = 150;
+    console.log(pikachu.hp)
+    $(".p").text("Health: " + pikachu.hp);
+    $(".v").text("Health: " + venusaur.hp);
+    $(".c").text("Health: " + charizard.hp);
+    $(".b").text("Health: " + blastoise.hp);
+    $("p").removeClass("herohealth defhealth");
+    $(pkmn).appendTo(".list").css({"background-color":"white", "color":"black"})
 });
