@@ -1,5 +1,4 @@
 var isYourPkmnChose = false;
-var pkmn = $(".pokemon");
 
 var yourPkmn;
 var enemyPkmn;
@@ -7,29 +6,35 @@ var enemyPkmn;
 var damage;
 var counterdmg;
 
+var knockouts = 0;
+
 var pikachu = {
     hp: 100,
-    attack: 10,
+    attack: 15,
     counter: 20
 };
 
 var venusaur = {
     hp: 180,
-    attack: 5,
+    attack: 10,
     counter: 10
 };
 
 var charizard = {
     hp: 120,
-    attack: 8,
+    attack: 13,
     counter: 16
 };
 
 var blastoise = {
     hp: 150,
-    attack: 6,
+    attack: 11,
     counter: 12
 };
+
+var original_pokemon = $(".pokemon");
+
+console.log(original_pokemon);
 
 $(".pokemon").click(function() {
     if (isYourPkmnChose) {
@@ -38,12 +43,40 @@ $(".pokemon").click(function() {
         counterdmg = enemyPkmn.counter;
     }
     else {
-        $(pkmn).appendTo(".enemiesimg").css("background-color", "red")
+        $(".pokemon").appendTo(".enemiesimg").css("background-color", "red")
         $(this).appendTo(".urcharimg").css("background-color", "white").addClass("hero")
         isYourPkmnChose = true;
         heroCheck();
         damage = yourPkmn.attack;
     }
+});
+
+$(".attack").click(function () {
+    
+    console.log(yourPkmn.attack);
+
+    $(".hero > .health").addClass("herohealth");
+    $(".defender > .health").addClass("defhealth");
+
+    yourPkmn.hp = yourPkmn.hp - counterdmg;
+    enemyPkmn.hp = enemyPkmn.hp - damage;
+
+    console.log(yourPkmn.hp)
+
+    damage = damage + yourPkmn.attack;
+    
+    console.log(damage);
+
+    $(".herohealth").text("Health: " + yourPkmn.hp);
+    $(".defhealth").text("Health: " + enemyPkmn.hp);
+
+    console.log("cluck")
+
+    healthCheck();
+}); 
+
+$(".reset").click(function () {
+    reset();
 });
 
 function heroCheck() {
@@ -79,7 +112,6 @@ function defenderCheck() {
 function healthCheck() {
     if (yourPkmn.hp <= 0) {
         alert("You ran out of Pokemon! Game Over!");
-        $(pkmn).appendTo(".list").css({"background-color":"white", "color":"black"})
 
         reset();
     }
@@ -88,12 +120,22 @@ function healthCheck() {
         alert("You defeated your opponent! Dare to continue?");
         $(".urenemyimg").empty();
         $("p").removeClass("defhealth");
+
+        knockouts++;
+    }
+
+    if (knockouts == 3) {
+        alert("You beat the Elite Three! Congratulations!")
+
+        reset();
     }
 }
 
 function reset() {
     $("p").removeClass("herohealth defhealth");
-    $("div").removeClass("hero defender")
+    $("div").removeClass("hero defender");
+    $("img").removeAttr("class");
+
     isYourPkmnChose = false;
 
     pikachu.hp = 100;
@@ -101,38 +143,19 @@ function reset() {
     charizard.hp = 120;
     blastoise.hp = 150;
 
+    knockouts = 0;
+
+    $(original_pokemon).appendTo(".list").css({"background-color":"white", "color":"black"});
+
     $(".p").text("Health: " + pikachu.hp);
     $(".v").text("Health: " + venusaur.hp);
     $(".c").text("Health: " + charizard.hp);
     $(".b").text("Health: " + blastoise.hp);
 
-    $(pkmn).appendTo(".list").css({"background-color":"white", "color":"black"})
+    // $(".urcharimg").empty();
+    // $(".enemies").empty();
+    // $(".urenemyimg").empty();
+
+    // $(".list").replaceWith(original_state);
+
 }
-
-$(".attack").click(function () {
-    
-    console.log(yourPkmn.attack);
-
-    $(".hero > .health").addClass("herohealth");
-    $(".defender > .health").addClass("defhealth");
-
-    yourPkmn.hp = yourPkmn.hp - counterdmg;
-    enemyPkmn.hp = enemyPkmn.hp - damage;
-
-    console.log(yourPkmn.hp)
-
-    damage = damage + yourPkmn.attack;
-    
-    console.log(damage);
-
-    $(".herohealth").text("Health: " + yourPkmn.hp);
-    $(".defhealth").text("Health: " + enemyPkmn.hp);
-
-    console.log("cluck")
-
-    healthCheck();
-}); 
-
-$(".reset").click(function () {
-    reset();
-});
